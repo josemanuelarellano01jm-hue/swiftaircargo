@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftAirCargo | Logística Global</title>
+    <!-- Tailwind CSS para diseño rápido y profesional -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#0A192F',
+                        'pure-white': '#FFFFFF'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-pure-white text-navy font-sans antialiased">
+
+    <!-- 1. HEADER / NAVEGACIÓN -->
+    <nav id="header" class="fixed w-full z-50 bg-navy text-white p-4 shadow-lg transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tighter">SWIFTAIRCARGO</h1>
+            <ul class="hidden md:flex space-x-8 font-medium">
+                <li><a href="#hero" class="hover:text-blue-400">Inicio</a></li>
+                <li><a href="#servicios" class="hover:text-blue-400">Servicios</a></li>
+                <li><a href="#mapa" class="hover:text-blue-400">Cobertura</a></li>
+                <li><a href="#contacto" class="hover:text-blue-400">Contacto</a></li>
+            </ul>
+            <!-- Botón Menú Móvil (JavaScript lo activará) -->
+            <button id="mobile-menu-btn" class="md:hidden">☰</button>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION (Vista Principal) -->
+    <header id="hero" class="relative h-screen flex items-center justify-center text-center text-white">
+        <div class="absolute inset-0 bg-navy opacity-80"></div> <!-- Filtro azul -->
+        <div class="relative z-10 px-4">
+            <h2 class="text-5xl md:text-7xl font-bold mb-6">SwiftAirCargo: Conectando fronteras</h2>
+            <p class="text-lg md:text-2xl mb-8">Soluciones logísticas rápidas, seguras y confiables.</p>
+            <a href="#contacto" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold transition">Contacto Directo</a>
+        </div>
+    </header>
+
+    <!-- 3. SECCIÓN DE SERVICIOS (Aquí expandiremos a cientos de líneas) -->
+    <section id="servicios" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h3 class="text-4xl font-bold text-center mb-16">Nuestros Servicios</h3>
+            <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Los componentes aquí serán renderizados o expandidos -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SECCIÓN DE MAPA Y COBERTURA -->
+    <section id="mapa" class="py-20 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h3 class="text-4xl font-bold mb-12">Cobertura Internacional</h3>
+            <!-- Aquí insertaremos el SVG del mapa en el futuro -->
+            <div class="w-full h-96 bg-gray-300 rounded-lg flex items-center justify-center">
+                <p>Mapa Interactivo de Rutas SwiftAirCargo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. BOTÓN WHATSAPP -->
+    <a href="https://wa.me/TUNUMERO" target="_blank" class="fixed bottom-8 right-8 bg-green-500 text-white p-5 rounded-full shadow-2xl hover:scale-110 transition z-50">
+        <span class="text-xl">💬</span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-12 text-center">
+        <p>&copy; 2026 SwiftAirCargo. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Lógica JavaScript (app.js) -->
+    <script src="js/app.js"></script>
+</body>
+</html>
