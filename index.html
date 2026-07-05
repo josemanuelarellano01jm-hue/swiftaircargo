@@ -3,81 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwiftAirCargo | Logística Global</title>
-    <!-- Tailwind CSS para diseño rápido y profesional -->
+    <title>SwiftAirCargo | Logística y Transporte</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'navy': '#0A192F',
-                        'pure-white': '#FFFFFF'
+                        brand: '#0A192F', // Azul oscuro corporativo
+                        graylight: '#F3F4F6', // Gris claro de fondo
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <style>
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(10, 25, 47, 0.95), rgba(10, 25, 47, 0.5));
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.2);
+        }
+    </style>
 </head>
-<body class="bg-pure-white text-navy font-sans antialiased">
+<body class="bg-graylight font-sans text-brand antialiased">
 
-    <!-- 1. HEADER / NAVEGACIÓN -->
-    <nav id="header" class="fixed w-full z-50 bg-navy text-white p-4 shadow-lg transition-all duration-300">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter">SWIFTAIRCARGO</h1>
-            <ul class="hidden md:flex space-x-8 font-medium">
-                <li><a href="#hero" class="hover:text-blue-400">Inicio</a></li>
-                <li><a href="#servicios" class="hover:text-blue-400">Servicios</a></li>
-                <li><a href="#mapa" class="hover:text-blue-400">Cobertura</a></li>
-                <li><a href="#contacto" class="hover:text-blue-400">Contacto</a></li>
-            </ul>
-            <!-- Botón Menú Móvil (JavaScript lo activará) -->
-            <button id="mobile-menu-btn" class="md:hidden">☰</button>
+    <!-- Navegación Fija -->
+    <nav class="bg-brand text-white fixed w-full z-50 top-0 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center gap-2">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="font-bold text-2xl tracking-tight">SwiftAirCargo</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#inicio" class="hover:text-gray-300 transition px-2 py-2 text-sm font-medium">Inicio</a>
+                    <a href="#rastreo" class="hover:text-gray-300 transition px-2 py-2 text-sm font-medium text-green-400">Rastrear Paquete</a>
+                    <a href="#servicios" class="hover:text-gray-300 transition px-2 py-2 text-sm font-medium">Servicios</a>
+                    <a href="#cobertura" class="hover:text-gray-300 transition px-2 py-2 text-sm font-medium">Cobertura</a>
+                    <a href="#galeria" class="hover:text-gray-300 transition px-2 py-2 text-sm font-medium">Galería</a>
+                    <a href="#contacto" class="bg-white text-brand px-5 py-2 rounded-md font-bold hover:bg-gray-200 transition">Contacto Directo</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-gray-300 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-brand border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block px-3 py-2 text-base font-medium hover:bg-gray-800 rounded-md">Inicio</a>
+                <a href="#rastreo" class="block px-3 py-2 text-base font-medium hover:bg-gray-800 rounded-md text-green-400">Rastrear Paquete</a>
+                <a href="#servicios" class="block px-3 py-2 text-base font-medium hover:bg-gray-800 rounded-md">Servicios</a>
+                <a href="#cobertura" class="block px-3 py-2 text-base font-medium hover:bg-gray-800 rounded-md">Cobertura</a>
+                <a href="#galeria" class="block px-3 py-2 text-base font-medium hover:bg-gray-800 rounded-md">Galería</a>
+            </div>
         </div>
     </nav>
 
-    <!-- 2. HERO SECTION (Vista Principal) -->
-    <header id="hero" class="relative h-screen flex items-center justify-center text-center text-white">
-        <div class="absolute inset-0 bg-navy opacity-80"></div> <!-- Filtro azul -->
-        <div class="relative z-10 px-4">
-            <h2 class="text-5xl md:text-7xl font-bold mb-6">SwiftAirCargo: Conectando fronteras</h2>
-            <p class="text-lg md:text-2xl mb-8">Soluciones logísticas rápidas, seguras y confiables.</p>
-            <a href="#contacto" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold transition">Contacto Directo</a>
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center bg-cover bg-center pt-28 pb-12 md:pt-36" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-md">
+                SwiftAirCargo: Conectando fronteras con velocidad
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto drop-shadow-sm">
+                Soluciones logísticas integrales diseñadas para que tu mercancía llegue a su destino de manera segura, rápida y sin complicaciones.
+            </p>
+            <a href="#rastreo" class="inline-block bg-green-500 text-white font-bold text-lg px-8 py-4 rounded-md shadow-lg hover:bg-green-600 transform hover:scale-105 transition-all mr-4 mb-4">
+                Rastrear Envío
+            </a>
+            <a href="#contacto" class="inline-block bg-white text-brand font-bold text-lg px-8 py-4 rounded-md shadow-lg hover:bg-gray-200 transform hover:scale-105 transition-all mb-4">
+                Contacto Directo
+            </a>
         </div>
-    </header>
+    </section>
 
-    <!-- 3. SECCIÓN DE SERVICIOS (Aquí expandiremos a cientos de líneas) -->
-    <section id="servicios" class="py-20 px-4">
-        <div class="container mx-auto">
-            <h3 class="text-4xl font-bold text-center mb-16">Nuestros Servicios</h3>
-            <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Los componentes aquí serán renderizados o expandidos -->
+    <!-- NUEVA SECCIÓN: Rastreo de Paquetes -->
+    <section id="rastreo" class="py-16 bg-brand text-white relative shadow-inner">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-3">Rastrea tu paquete en tiempo real</h2>
+            <p class="text-gray-300 mb-8 text-lg">Ingresa tu número de guía (Tracking Number) para conocer el estado exacto de tu mercancía.</p>
+
+            <form id="tracking-form" class="flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto">
+                <input type="text" id="tracking-input" placeholder="Ej: SWIFT-987654321" required
+                       class="w-full md:w-2/3 px-6 py-4 rounded-md text-brand font-bold text-lg focus:outline-none focus:ring-4 focus:ring-green-400 uppercase">
+                <button type="submit" class="w-full md:w-1/3 bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-md transition-all shadow-lg text-lg flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    Buscar
+                </button>
+            </form>
+
+            <!-- Contenedor del Resultado de Tracking (Simulado y Oculto por defecto) -->
+            <div id="tracking-result" class="hidden mt-12 bg-white text-brand p-6 md:p-10 rounded-xl shadow-2xl text-left transform transition-all duration-500">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-gray-200 pb-6 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500 font-semibold mb-1">RESULTADO PARA LA GUÍA:</p>
+                        <h3 class="text-2xl md:text-3xl font-black text-brand tracking-wider" id="tracking-number-display"></h3>
+                    </div>
+                    <span class="bg-green-100 text-green-800 text-sm font-bold px-4 py-2 rounded-full border border-green-200 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        En Tránsito a Destino
+                    </span>
+                </div>
+
+                <!-- Timeline de estado -->
+                <div class="relative border-l-4 border-gray-200 ml-4 md:ml-6 space-y-8 mt-4">
+                    <!-- Paso 1 (Actual) -->
+                    <div class="relative ml-8">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-green-500 rounded-full -left-12 ring-4 ring-white shadow-md">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <h4 class="font-bold text-xl text-brand">Liberado en Aduana (Destino)</h4>
+                        <p class="text-gray-600 mt-1">El paquete ha sido procesado por aduanas y está listo para ser despachado a la sucursal local.</p>
+                        <p class="text-sm text-gray-400 font-medium mt-2">Hoy, 09:30 AM</p>
+                    </div>
+                    <!-- Paso 2 -->
+                    <div class="relative ml-8">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-brand rounded-full -left-12 ring-4 ring-white shadow-md">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <h4 class="font-bold text-xl text-brand">Llegada a Puerto/Aeropuerto destino</h4>
+                        <p class="text-gray-600 mt-1">Mercancía descargada y en espera de revisión aduanal.</p>
+                        <p class="text-sm text-gray-400 font-medium mt-2">Ayer, 14:15 PM</p>
+                    </div>
+                    <!-- Paso 3 -->
+                    <div class="relative ml-8">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-brand rounded-full -left-12 ring-4 ring-white shadow-md">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <h4 class="font-bold text-gray-500 text-xl">Recibido en Almacén Internacional (Origen)</h4>
+                        <p class="text-gray-500 mt-1">Paquete consolidado y preparado para su exportación.</p>
+                        <p class="text-sm text-gray-400 font-medium mt-2">Hace 3 días, 10:00 AM</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. SECCIÓN DE MAPA Y COBERTURA -->
-    <section id="mapa" class="py-20 bg-gray-100">
-        <div class="container mx-auto text-center">
-            <h3 class="text-4xl font-bold mb-12">Cobertura Internacional</h3>
-            <!-- Aquí insertaremos el SVG del mapa en el futuro -->
-            <div class="w-full h-96 bg-gray-300 rounded-lg flex items-center justify-center">
-                <p>Mapa Interactivo de Rutas SwiftAirCargo</p>
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-brand mb-4">Nuestros Servicios</h2>
+                <div class="w-24 h-1 bg-brand mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Ofrecemos un portafolio completo para cubrir todas tus necesidades de importación y exportación.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-graylight p-8 rounded-xl border border-gray-200">
+                    <div class="w-14 h-14 bg-brand text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Casillero Internacional</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Tu propia dirección física en el extranjero para recibir compras online y consolidar paquetes antes del envío final.</p>
+                </div>
+                <div class="service-card bg-graylight p-8 rounded-xl border border-gray-200">
+                    <div class="w-14 h-14 bg-brand text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Transporte Aéreo</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">La opción más rápida para envíos urgentes. Garantizamos espacios y tarifas competitivas en las principales aerolíneas.</p>
+                </div>
+                <div class="service-card bg-graylight p-8 rounded-xl border border-gray-200">
+                    <div class="w-14 h-14 bg-brand text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Transporte Marítimo</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Ideal para carga pesada o de gran volumen (FCL/LCL). Optimizamos rutas para reducir costos sin sacrificar seguridad.</p>
+                </div>
+                <div class="service-card bg-graylight p-8 rounded-xl border border-gray-200">
+                    <div class="w-14 h-14 bg-brand text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gestión Aduanera</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Asesoría y tramitación completa de documentos para que tu carga pase aduanas rápidamente y cumpliendo todas las normativas.</p>
+                </div>
+                <div class="service-card bg-graylight p-8 rounded-xl border border-gray-200">
+                    <div class="w-14 h-14 bg-brand text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Seguro de Carga</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Protege tu inversión con nuestras pólizas de seguro a todo riesgo. Tranquilidad garantizada desde el origen hasta el destino final.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. BOTÓN WHATSAPP -->
-    <a href="https://wa.me/TUNUMERO" target="_blank" class="fixed bottom-8 right-8 bg-green-500 text-white p-5 rounded-full shadow-2xl hover:scale-110 transition z-50">
-        <span class="text-xl">💬</span>
+    <!-- Mapa de Cobertura -->
+    <section id="cobertura" class="py-20 bg-graylight">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-4xl font-bold text-brand mb-4">Alcance Global</h2>
+                    <div class="w-24 h-1 bg-brand mb-6"></div>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        Conectamos los principales puertos y aeropuertos del mundo. Nuestras alianzas estratégicas nos permiten operar fluidamente en las rutas más comerciales.
+                    </p>
+                    
+                    <h3 class="text-xl font-bold mb-4">Principales Destinos:</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-lg font-medium text-gray-700">
+                            <span class="text-2xl">🇺🇸</span> Estados Unidos (Miami, NY, LA)
+                        </li>
+                        <li class="flex items-center gap-3 text-lg font-medium text-gray-700">
+                            <span class="text-2xl">🇨🇳</span> China (Shenzhen, Shanghái)
+                        </li>
+                        <li class="flex items-center gap-3 text-lg font-medium text-gray-700">
+                            <span class="text-2xl">🇪🇸</span> España (Madrid, Valencia)
+                        </li>
+                        <li class="flex items-center gap-3 text-lg font-medium text-gray-700">
+                            <span class="text-2xl">🇨🇴</span> Colombia (Bogotá, Buenaventura)
+                        </li>
+                        <li class="flex items-center gap-3 text-lg font-medium text-gray-700">
+                            <span class="text-2xl">🇻🇪</span> Venezuela (Caracas)
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop" alt="Mapa global de cobertura logística" class="w-full h-auto object-cover hover:scale-105 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-brand mb-4">Nuestra Operación</h2>
+                <div class="w-24 h-1 bg-brand mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Infraestructura moderna y procesos eficientes para cuidar de tu mercancía.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="relative group rounded-xl overflow-hidden shadow-lg h-72">
+                    <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=1000&auto=format&fit=crop" alt="Almacenes modernos organizados" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">Almacenes Modernos</span>
+                    </div>
+                </div>
+                <div class="relative group rounded-xl overflow-hidden shadow-lg h-72">
+                    <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?q=80&w=1000&auto=format&fit=crop" alt="Cajas de embalaje y logística" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">Embalaje Seguro</span>
+                    </div>
+                </div>
+                <div class="relative group rounded-xl overflow-hidden shadow-lg h-72">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1000&auto=format&fit=crop" alt="Operación logística con montacargas" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">Distribución Eficiente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Sección de Preguntas Frecuentes -->
+<!-- Sección de Preguntas Frecuentes -->
+<section id="faq" class="py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Título -->
+        <div class="bg-red-700 text-white text-center py-4 rounded-t-lg mb-0">
+            <h2 class="text-3xl font-bold">Preguntas Frecuentes</h2>
+        </div>
+        
+        <!-- Contenedor de preguntas -->
+        <div class="bg-brand border-x-4 border-b-4 border-brand p-4 space-y-3 rounded-b-lg">
+            
+            <!-- Pregunta 1 -->
+            <div class="bg-white rounded shadow-sm border-r-4 border-red-700 overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-semibold text-brand flex justify-between items-center">
+                    ¿Cómo obtengo un casillero?
+                    <span class="text-red-700 font-bold">+</span>
+                </button>
+                <div class="hidden px-4 pb-4 text-gray-600 text-sm">
+                    Regístrate en nuestra plataforma y recibirás automáticamente tu dirección física en el extranjero.
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="bg-white rounded shadow-sm border-r-4 border-red-700 overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-semibold text-brand flex justify-between items-center">
+                    ¿Qué son artículos prohibidos?
+                    <span class="text-red-700 font-bold">+</span>
+                </button>
+                <div class="hidden px-4 pb-4 text-gray-600 text-sm">
+                    Son aquellos productos restringidos por normativas aduaneras o de seguridad aérea (ej. químicos peligrosos, armas).
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="bg-white rounded shadow-sm border-r-4 border-red-700 overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-semibold text-brand flex justify-between items-center">
+                    ¿Quieres ser un aliado comercial?
+                    <span class="text-red-700 font-bold">+</span>
+                </button>
+                <div class="hidden px-4 pb-4 text-gray-600 text-sm">
+                    Contáctanos a través de nuestro formulario de aliados o mediante WhatsApp para conocer nuestros beneficios corporativos.
+                </div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="bg-white rounded shadow-sm border-r-4 border-red-700 overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-semibold text-brand flex justify-between items-center">
+                    ¿Cómo elijo mi sucursal de entrega?
+                    <span class="text-red-700 font-bold">+</span>
+                </button>
+                <div class="hidden px-4 pb-4 text-gray-600 text-sm">
+                    Al momento de realizar tu pre-alerta, podrás seleccionar la sucursal de tu preferencia en el sistema.
+                </div>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="bg-white rounded shadow-sm border-r-4 border-red-700 overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-semibold text-brand flex justify-between items-center">
+                    ¿Cómo rastrear mi paquete?
+                    <span class="text-red-700 font-bold">+</span>
+                </button>
+                <div class="hidden px-4 pb-4 text-gray-600 text-sm">
+                    Utiliza el número de guía (Tracking Number) en nuestra sección de rastreo ubicada en la parte superior.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Script para la funcionalidad de despliegue -->
+<script>
+    function toggleFaq(button) {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('span');
+        content.classList.toggle('hidden');
+        icon.textContent = content.classList.contains('hidden') ? '+' : '-';
+    }
+</script>
+    <!-- Footer / Contacto -->
+    <footer id="contacto" class="bg-brand text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6">¿Listo para enviar con SwiftAirCargo?</h2>
+            <p class="mb-8 text-gray-300">Ponte en contacto con nuestros especialistas en logística hoy mismo.</p>
+            <p class="text-gray-400 text-sm mt-12">&copy; 2026 SwiftAirCargo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 flex items-center justify-center"
+       aria-label="Contactar por WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 0C5.385 0 0 5.384 0 12.03c0 2.12.552 4.186 1.6 6.015L.122 23.518l5.632-1.477A11.965 11.965 0 0012.031 24c6.646 0 12.03-5.385 12.03-12.03S18.677 0 12.031 0zm0 22.016a9.92 9.92 0 01-5.066-1.39l-.363-.216-3.766.988.995-3.668-.236-.376A9.917 9.917 0 012.017 12.03c0-5.525 4.493-10.017 10.014-10.017 5.523 0 10.016 4.492 10.016 10.017 0 5.524-4.493 10.016-10.016 10.016zm5.5-7.514c-.302-.15-1.782-.88-2.057-.98-.276-.1-.477-.15-.678.15-.2.302-.777.98-.953 1.18-.176.202-.353.227-.654.077-1.455-.724-2.585-1.527-3.567-3.21-.212-.363.093-.538.375-.928.1-.142.226-.276.326-.427.1-.15.126-.25.202-.427.075-.176.037-.326-.038-.476-.076-.15-1.365-3.32-1.745-4.444-.45-1.332-.977-1.127-1.282-1.127-.276 0-.678-.026-.98-.026-.301 0-.778.113-1.18.552-.401.439-1.531 1.494-1.531 3.639 0 2.146 1.569 4.217 1.782 4.502.213.288 3.072 4.693 7.442 6.58.49.213 1.05.376 1.488.49.49.126 1.05.15 1.531.077.538-.076 1.781-.727 2.032-1.43.25-.702.25-1.303.175-1.43-.075-.126-.276-.201-.577-.35z"></path>
+        </svg>
     </a>
 
-    <!-- Footer -->
-    <footer class="bg-navy text-white py-12 text-center">
-        <p>&copy; 2026 SwiftAirCargo. Todos los derechos reservados.</p>
-    </footer>
+    <!-- JavaScript para interacción móvil y simulación de Rastreo -->
+    <script>
+        // Menú Móvil
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
 
-    <!-- Lógica JavaScript (app.js) -->
-    <script src="js/app.js"></script>
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Simulación de Rastreo de Paquetes
+        const trackingForm = document.getElementById('tracking-form');
+        const trackingInput = document.getElementById('tracking-input');
+        const trackingResult = document.getElementById('tracking-result');
+        const trackingNumberDisplay = document.getElementById('tracking-number-display');
+
+        trackingForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Evita recargar la página
+            const trackingId = trackingInput.value.trim().toUpperCase();
+            
+            if(trackingId) {
+                // Actualiza el número en el contenedor de resultados
+                trackingNumberDisplay.textContent = trackingId;
+                
+                // Muestra el contenedor quitando la clase 'hidden'
+                trackingResult.classList.remove('hidden');
+                
+                // Efecto de scroll suave hacia el resultado
+                trackingResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    </script>
 </body>
 </html>
